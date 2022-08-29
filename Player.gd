@@ -16,15 +16,8 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	
 func _process(delta):
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x = 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x = -1
-	if Input.is_action_pressed("move_down"):
-		velocity.y = 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y = -1
+	var accelerometer = Input.get_accelerometer()
+	var velocity = Vector2(accelerometer.x, accelerometer.z)
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
